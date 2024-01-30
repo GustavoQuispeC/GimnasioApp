@@ -1,13 +1,23 @@
 using Microsoft.AspNetCore.ResponseCompression;
+using GimnasioApp.DataAccess.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
+
+builder.Services.AddDbContext<GimnasioAppDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("GimnasioAppDb"));
+});
 // Add services to the container.
 
-builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
+//builder.Services.AddControllersWithViews();
+//builder.Services.AddRazorPages();
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
