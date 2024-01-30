@@ -1,10 +1,14 @@
 using Microsoft.AspNetCore.ResponseCompression;
 using GimnasioApp.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
+using GimnasioApp.Repositories.Implementaciones;
+using GimnasioApp.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddTransient<IMembresiaRepository, MembresiaRepository>();
+
 
 builder.Services.AddDbContext<GimnasioAppDbContext>(options =>
 {
@@ -39,7 +43,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 
-app.MapRazorPages();
+//app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
 

@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Implementaciones\" />
-    <Folder Include="Interfaces\" />
+    <ProjectReference Include="..\GimnasioApp.DataAccess\GimnasioApp.DataAccess.csproj" />
+    <ProjectReference Include="..\GimnasioApp.Entities\GimnasioApp.Entities.csproj" />
   </ItemGroup>
 
 </Project>

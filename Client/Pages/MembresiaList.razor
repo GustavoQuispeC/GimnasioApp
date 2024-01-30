@@ -1,0 +1,61 @@
+﻿@page "/membresia/list"
+@using GimnasioApp.Shared
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Membresia</h3>
+
+@if(_membresia==null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Observación</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in _membresia)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Descripcion</td>
+                    <td>@item.PrecioMembresia</td>
+                    <td>@item.Observacion</td>
+                </tr>
+            }
+        </tbody>
+
+
+
+
+
+
+
+
+
+    </table>
+}
+
+
+
+
+
+
+
+
+
+@code {
+    private MembresiaDto[]? _membresia;
+    protected override async Task OnInitializedAsync()
+    {
+        _membresia = await Http.GetFromJsonAsync<MembresiaDto[]>("api/membresia");
+    }
+
+}
