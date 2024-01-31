@@ -8,11 +8,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GimnasioApp.Client", "Clien
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GimnasioApp.Shared", "Shared\GimnasioApp.Shared.csproj", "{F4310B81-9BBE-479F-88C4-F389CF01334E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GimnasioApp.Entities", "GimnasioApp.Entities\GimnasioApp.Entities.csproj", "{4449E0BD-CE4F-43DF-871A-D020C0E60C88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GimnasioApp.Entities", "GimnasioApp.Entities\GimnasioApp.Entities.csproj", "{4449E0BD-CE4F-43DF-871A-D020C0E60C88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GimnasioApp.Repositories", "GimnasioApp.Repositories\GimnasioApp.Repositories.csproj", "{3BFB5F3E-B454-4CCE-984F-F0F1CBFF2B21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GimnasioApp.Repositories", "GimnasioApp.Repositories\GimnasioApp.Repositories.csproj", "{3BFB5F3E-B454-4CCE-984F-F0F1CBFF2B21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GimnasioApp.DataAccess", "GimnasioApp.DataAccess\GimnasioApp.DataAccess.csproj", "{606B5F8D-64B4-46B8-B0FE-0446F2F06054}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GimnasioApp.DataAccess", "GimnasioApp.DataAccess\GimnasioApp.DataAccess.csproj", "{606B5F8D-64B4-46B8-B0FE-0446F2F06054}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

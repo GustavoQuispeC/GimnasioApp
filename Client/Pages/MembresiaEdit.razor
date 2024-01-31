@@ -1,0 +1,31 @@
+﻿@page "/membresia/editar/{id:int}"
+@using GimnasioApp.Shared
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+
+<h3>MembresiaEdit</h3>
+<MembresiaEditPage Membresia="Registro" OnGrabar="Actualizar"/>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    public MembresiaDto Registro { get; set; } = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var response = await Http.GetFromJsonAsync<MembresiaDto>($"api/membresia/{id}");
+        if (response is not null)
+        {
+            Registro = response;
+        }
+    }
+
+    private async Task Actualizar()
+    {
+        await Http.PutAsJsonAsync($"api/membresia/{id}", Registro);
+
+        NavigationManager.NavigateTo("/membresia/list");
+    }
+}

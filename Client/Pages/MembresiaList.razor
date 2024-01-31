@@ -2,8 +2,20 @@
 @using GimnasioApp.Shared
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
+<style>
+    .colorEditar {
+        color: blue; 
+    }
+    .colorEliminar
+    {
+        color: red;
+    }
+</style>
+
+
 
 <h3>Membresia</h3>
+<MatButtonLink Href="membresia/crear" Raised="true" Icon="add_circle">Nuevo</MatButtonLink>
 
 @if(_membresia==null)
 {
@@ -11,7 +23,34 @@
 }
 else
 {
-    <table class="table">
+    <MatTable Items="@_membresia" class="mat-elevation-z5">
+        <MatTableHeader>
+            
+            <th>Id</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Observación</th>
+            <th>Acciones</th>
+            <th></th>
+        </MatTableHeader>
+        <MatTableRow>
+            <td>@context.Id</td>
+            <td>@context.Descripcion</td>
+            <td>@string.Format("S/.{0:f2}", @context.PrecioMembresia)</td>
+            <td>@context.Observacion</td>
+            <td><MatIconButton Icon="edit" Class="colorEditar" @onclick="()=>Editar(context.Id)"></MatIconButton>
+                <MatIconButton Icon="delete" Class="colorEliminar" @onclick="()=>Eliminar(context.Id)"></MatIconButton>
+            </td>
+            
+            
+        </MatTableRow>
+        
+    </MatTable>
+
+
+
+
+    @* <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -31,31 +70,33 @@ else
                 </tr>
             }
         </tbody>
+    </table> *@
+    
 
-
-
-
-
-
-
-
-
-    </table>
+     
+    
 }
-
-
-
-
-
-
-
 
 
 @code {
     private MembresiaDto[]? _membresia;
     protected override async Task OnInitializedAsync()
     {
+        await Cargar();
+    }
+    private async Task Cargar()
+    {
         _membresia = await Http.GetFromJsonAsync<MembresiaDto[]>("api/membresia");
     }
+    private void Editar(int id)
+    {
+        NavigationManager.NavigateTo($"membresia/editar/{id}");
+    }
+    private async void Eliminar(int id)
+    {
+        await Http.DeleteAsync($"api/membresia/{id}");
+        await Cargar();
+    }
 
+   
 }

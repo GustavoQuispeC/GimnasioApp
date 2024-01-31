@@ -21,8 +21,10 @@ namespace GimnasioApp.Repositories.Implementaciones
         }
 
         public async Task<ICollection<TEntity>> ListAsync()
+
         {
             return await Context.Set<TEntity>()
+                .Where(x => x.Estado)
                .AsNoTracking()
                .ToListAsync();
         }

@@ -1,0 +1,46 @@
+﻿@using GimnasioApp.Shared
+
+
+
+<EditForm Model="Membresia" OnSubmit="Grabar">
+
+    <div class="row row-cols-1 row-cols-md-2">
+        <div class="col">
+            <div class="mb-3 row">
+                <p>
+                    <MatTextField @bind-Value="@Membresia.Descripcion" Label="Descripción" Required></MatTextField>
+                </p>
+            </div>
+            <div class="mb-3 row">
+                <p>
+                    <MatTextField @bind-Value="@Membresia.PrecioMembresia" step="0.01"  Label="Precio Membresia" Required></MatTextField>
+                </p>
+            </div>
+            <div class="mb-3 row">
+                <p>
+                    <MatTextField @bind-Value="@Membresia.Observacion" Label="Observación"></MatTextField>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row row-cols-4">
+         <MatButton Raised="true" type="submit" class="material-symbols-outlined" Icon="save">Grabar</MatButton>
+             
+         
+    </div>
+
+</EditForm>
+
+
+
+@code {
+    [Parameter]
+    public MembresiaDto Membresia { get; set; } = new MembresiaDto();
+    [Parameter]
+    public EventCallback OnGrabar { get; set; }
+    private void Grabar()
+    {
+        OnGrabar.InvokeAsync();
+    }
+
+}

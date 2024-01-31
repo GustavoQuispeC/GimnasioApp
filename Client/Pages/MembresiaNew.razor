@@ -1,0 +1,19 @@
+﻿@page "/membresia/crear"
+@using GimnasioApp.Shared
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+
+<h3>Membresia</h3>
+<MembresiaEditPage Membresia = "Membresia" OnGrabar="Grabar"></MembresiaEditPage>
+
+@code {
+    public MembresiaDto Membresia { get; set; } = new MembresiaDto();
+
+    private async Task Grabar()
+    {
+        await Http.PostAsJsonAsync("api/membresia", Membresia);
+        NavigationManager.NavigateTo("/membresia/list");
+    }
+
+}
