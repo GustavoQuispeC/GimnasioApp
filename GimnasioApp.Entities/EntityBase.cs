@@ -9,7 +9,7 @@ namespace GimnasioApp.Entities
     public class EntityBase
     {
         public int Id { get; set; }
-        public DateTime FechaCreacion { get; set; }
+        public DateTime FechaCreacion { get; set; } = DateTime.Now;
         public bool Estado { get; set; }
         protected EntityBase() { 
             Estado = true;

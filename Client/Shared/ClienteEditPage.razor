@@ -1,0 +1,95 @@
+﻿@using GimnasioApp.Shared
+
+
+
+<EditForm Model="Cliente" OnSubmit="Grabar">
+    <div class="row row-cols-1 row-cols-md-2">
+        <div class="col">
+            <div class="mb-3 row">
+                <p>
+                    <MatTextField @bind-Value="@Cliente.Nombres" Label="Nombres:" Required></MatTextField>
+                 </p>
+             </div>
+             <div class="mb-3 row">
+                 <p>
+                     <MatTextField @bind-Value="@Cliente.ApellidoP" Label="Apellido Paterno:" Required></MatTextField>
+                 </p>
+             </div>
+             <div class="mb-3 row">
+                 <p>
+                     <MatTextField @bind-Value="@Cliente.ApellidoM" Label="Apellido Materno:" Required></MatTextField>
+                 </p>
+             </div>
+             <div class="mb-3 row">
+                 <p>
+                     <MatDatePicker @bind-Value="@Cliente.FechaNacimiento" Label="Fecha Nacimiento:" TValue="DateTime"></MatDatePicker>
+                 </p>
+             </div>
+             <div class="mb-3 row">
+                 <p>
+                     <MatSelect Label="Sexo:" @bind-Value="@Cliente.Genero" required>
+                         <MatOption Value="@("Masculino")">Masculino</MatOption>
+                         <MatOption Value="@("Femenino")">Femenino</MatOption>
+                     </MatSelect>
+                 </p>
+                 
+             </div>
+             <div class="mb-3 row">
+                 <p>
+                     <MatSelect Label="Estado Civil::" @bind-Value="@Cliente.EstadoCivil">
+                         <MatOption Value="@("Soltero")">Soltero</MatOption>
+                         <MatOption Value="@("Casado")">Casado</MatOption>
+                         <MatOption Value="@("Divorciado")">Divorciado</MatOption>
+                         <MatOption Value="@("Viudo")">Viudo</MatOption>
+                     </MatSelect>
+                 </p>
+             </div>
+             <div class="mb-3 row">
+                 <p>
+                     <MatTextField Type="Number" @bind-Value="@Cliente.DNI" Label="D.N.I:"></MatTextField>
+                 </p>
+             </div>
+             <div class="mb-3 row">
+                 <p>
+                     <MatTextField @bind-Value="@Cliente.Direccion" Label="Dirección:"></MatTextField>
+                 </p>
+             </div>
+             <div class="mb-3 row">
+                 <p>
+                     <MatTextField Type="email" @bind-Value="@Cliente.Correo" Label="Correo electrónico:"></MatTextField>
+                 </p>
+             </div>
+             <div class="mb-3 row">
+                 <p>
+                     <MatTextField @bind-Value="@Cliente.Telefono" Label="Teléfono:"></MatTextField>
+                 </p>
+             </div>
+             <div class="mb-3 row">
+                 <p>
+                     <MatTextField @bind-Value="@Cliente.TelefonoEmergencia" Label="Teléfono de Emergencia:"></MatTextField>
+                 </p>
+             </div>
+            
+
+         </div>
+     </div>
+     <div class="row row-cols-4">
+         <MatButton Raised="true" type="submit" class="material-symbols-outlined" Icon="save">Grabar</MatButton>
+     </div>
+</EditForm>
+
+
+
+@code {
+    [Parameter]
+    public ClienteDto Cliente { get; set; } = new ClienteDto();
+    [Parameter]
+    public EventCallback OnGrabar{ get; set; }
+    private void Grabar()
+    {
+        OnGrabar.InvokeAsync();
+    }
+    
+       
+       
+}

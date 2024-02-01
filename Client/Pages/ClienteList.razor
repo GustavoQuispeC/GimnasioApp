@@ -1,0 +1,88 @@
+﻿@page "/clientes/list"
+@using GimnasioApp.Shared
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+<style>
+    .colorEditar {
+        color: blue; 
+    }
+    .colorEliminar
+    {
+        color: red;
+    }
+</style>
+
+<h3>Clientes</h3>
+<MatButtonLink Href="clientes/crear" Raised="true" Icon="add_circle">Nuevo</MatButtonLink>
+
+<hr />
+
+@if (_cliente == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    
+    <MatTable Items="@_cliente" class="mat-elevation-z5">
+        <MatTableHeader>
+
+            <th>Id</th>
+            <th>Nombres</th>
+            <th>A. Paterno</th>
+            <th>A. Materno</th>
+            <th>F.Nacimiento</th>
+            <th>Sexo</th>
+            <th>Celular</th>
+            <th>Telf.Emergencia</th>
+            <th>Acciones</th>
+            
+
+
+        </MatTableHeader>
+        <MatTableRow>
+            <td>@context.Id</td>
+            <td>@context.Nombres</td>
+            <td>@context.ApellidoP</td>
+            <td>@context.ApellidoM</td>
+            <td>@context.FechaNacimiento</td>
+            <td>@context.Genero</td>
+            <td>@context.Telefono</td>
+            <td>@context.TelefonoEmergencia</td>
+            <td>
+                <MatIconButton Icon="edit" Class="colorEditar" @onclick="()=>Editar(context.Id)"></MatIconButton>
+                <MatIconButton Icon="delete" Class="colorEliminar" @onclick="()=>Eliminar(context.Id)"></MatIconButton>
+            </td>
+        </MatTableRow>
+
+    </MatTable>
+
+
+
+}
+
+
+
+
+
+
+@code {
+    private ClienteDto[]? _cliente;
+    protected override async Task OnInitializedAsync()
+    {
+        await Cargar();
+    }
+    private async Task Cargar()
+    {
+        _cliente = await Http.GetFromJsonAsync<ClienteDto[]>("api/clientes");
+    }
+    private void Editar(int id)
+    {
+        NavigationManager.NavigateTo($"clientes/editar/{id}");
+    }
+    private async void Eliminar(int id)
+    {
+        await Http.DeleteAsync($"api/clientes/{id}");
+        await Cargar();
+    }
+}

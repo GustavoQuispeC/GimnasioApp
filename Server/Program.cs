@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddTransient<IMembresiaRepository, MembresiaRepository>();
-
+builder.Services.AddTransient<IClienteRepository, ClienteRepository>();
 
 builder.Services.AddDbContext<GimnasioAppDbContext>(options =>
 {

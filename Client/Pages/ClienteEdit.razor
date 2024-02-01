@@ -1,0 +1,29 @@
+﻿@page "/clientes/editar/{id:int}"
+@using GimnasioApp.Shared
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Cliente</h3>
+<ClienteEditPage Cliente = "Registro" OnGrabar="Actualizar"/>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    public ClienteDto Registro { get; set; } = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var response = await Http.GetFromJsonAsync<ClienteDto>($"api/clientes/{id}");
+        if(response is not null)
+        {
+            Registro = response;
+        }
+    }
+    private async Task Actualizar()
+    {
+        await Http.PutAsJsonAsync($"api/clientes/{id}", Registro);
+         NavigationManager.NavigateTo("/clientes/list");
+    }
+
+}

@@ -1,0 +1,17 @@
+﻿@page "/clientes/crear"
+@using GimnasioApp.Shared
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Cliente</h3>
+<ClienteEditPage Cliente="Cliente" OnGrabar="Grabar"></ClienteEditPage>
+
+@code {
+    public ClienteDto Cliente { get; set; } = new ClienteDto();
+    private async Task Grabar()
+    {
+        await Http.PostAsJsonAsync("api/clientes", Cliente);
+        NavigationManager.NavigateTo("/clientes/list");
+    }
+
+}
